@@ -8,17 +8,20 @@
     <ul id="playlist"></ul>
     
     <script>
-      const BUCKET = 'selah-v'
       // Initialize the S3 client
-      AWS.config.update({accessKeyId: ACCESS_KEY, secretAccessKey: SECRET_KEY});
-      let s3 = new AWS.S3();
+      AWS.config.region = 'us-east-1'; // Region
+      AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+          IdentityPoolId: 'us-east-1:5ffdbd30-aed0-486f-a6db-7c1a0b64adfe',
+      });
+
+      const BUCKET = 'selah-v'
+      let s3 = new AWS.S3({params: {Bucket: BUCKET}});
 
       // Set the S3 bucket and prefix for your audio files
-      let bucket = BUCKET;
       let prefix = 'tapes/';
 
       // Get a list of audio files from the S3 bucket
-      s3.listObjects({Bucket: BUCKET, Prefix: prefix}, function(err, data) {
+      s3.listObjects({Prefix: prefix}, function(err, data) {
         if (err) {
           console.log(err, err.stack);
         } else {
