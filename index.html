@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aws-sdk/2.1349.0/aws-sdk.min.js" integrity="sha512-UkZItCZku/xoMGtOrZWLpaY75t59lIoKboygn2zVA+ohng4kiVYJTQUEncZN+J6HE4ehR5IucdunfhDKJE2kwg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  </head>
+  <body>
+    <h1>Selah V Music Log</h1>
+    <audio controls id="music-player"></audio>
+    <ul id="playlist"></ul>
+    
+    <script>
+      const BUCKET = 'selah-v'
+      // Initialize the S3 client
+      AWS.config.update({accessKeyId: ACCESS_KEY, secretAccessKey: SECRET_KEY});
+      let s3 = new AWS.S3();
+
+      // Set the S3 bucket and prefix for your audio files
+      let bucket = BUCKET;
+      let prefix = 'tapes/';
+
+      // Get a list of audio files from the S3 bucket
+      s3.listObjects({Bucket: BUCKET, Prefix: prefix}, function(err, data) {
+        if (err) {
+          console.log(err, err.stack);
+        } else {
+          // Iterate through the list of audio files and add them to the playlist
+          let playlist = document.getElementById('playlist');
+          data.Contents.forEach(function(object) {
+            let key = object.Key;
+            let url = 'https://' + BUCKET + '.s3.amazonaws.com/' + key;
+            let li = document.createElement('li');
+            li.innerHTML = key;
+            li.addEventListener('click', function() {
+              let audio = document.getElementById('music-player');
+              audio.src = url;
+              audio.play();
+            });
+            playlist.appendChild(li);
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
