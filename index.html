@@ -1,46 +1,25 @@
 <html>
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aws-sdk/2.1349.0/aws-sdk.min.js" integrity="sha512-UkZItCZku/xoMGtOrZWLpaY75t59lIoKboygn2zVA+ohng4kiVYJTQUEncZN+J6HE4ehR5IucdunfhDKJE2kwg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="main.css">
   </head>
   <body>
-    <h1>Selah V Music Log</h1>
+    <section style="height: 15%; margin-bottom: 14px;" class="bubble">
+      <div class="playlist-subtitle">Music Log</div>
+      <div class="playlist-title">Selah V</div>
+    </section>
     <audio controls id="music-player"></audio>
     <ul id="playlist"></ul>
-    
+    <script src="./src/aws.js"></script> 
     <script>
-      // Initialize the S3 client
-      AWS.config.region = 'us-east-1'; // Region
-      AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-          IdentityPoolId: 'us-east-1:5ffdbd30-aed0-486f-a6db-7c1a0b64adfe',
-      });
+      async function intialize() {
+        const client = createClient()
+        const objects = await client.getAllObjects()
+        client.addObjectsToPlaylist(objects)
+      }
 
-      const BUCKET = 'selah-v'
-      let s3 = new AWS.S3({params: {Bucket: BUCKET}});
-
-      // Set the S3 bucket and prefix for your audio files
-      let prefix = 'tapes/';
-
-      // Get a list of audio files from the S3 bucket
-      s3.listObjects({Prefix: prefix}, function(err, data) {
-        if (err) {
-          console.log(err, err.stack);
-        } else {
-          // Iterate through the list of audio files and add them to the playlist
-          let playlist = document.getElementById('playlist');
-          data.Contents.forEach(function(object) {
-            let key = object.Key;
-            let url = 'https://' + BUCKET + '.s3.amazonaws.com/' + key;
-            let li = document.createElement('li');
-            li.innerHTML = key;
-            li.addEventListener('click', function() {
-              let audio = document.getElementById('music-player');
-              audio.src = url;
-              audio.play();
-            });
-            playlist.appendChild(li);
-          });
-        }
-      });
+      intialize()
     </script>
   </body>
 </html>
