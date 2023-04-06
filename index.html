@@ -40,7 +40,7 @@
           li.id = id
           playlist.appendChild(li);
           new Typed(`#${id}`, {
-            strings: [alien_title, title],
+            strings: [alien_title, title.repeat(4)],
             typeSpeed: Math.random() * 100,
             startDelay: Math.random() * 500,
             smartBackspace: true,
