@@ -6,15 +6,27 @@ new Typed('#playlist-title-numeral', {
   showCursor: false,
 });
 
+
+let IS_PLAYING = false
+
 function audioPlayerToTextureMove() {
   const audio = document.getElementById('music-player');
   const textured_elements = document.getElementsByClassName('texture')
-  audio.addEventListener('play', () => animateTexures(textured_elements))
-  audio.addEventListener('pause', () => endAnimateTexures(textured_elements))
+  audio.addEventListener('play', (event) => {
+    if (!IS_PLAYING) animateTexures(textured_elements)
+    IS_PLAYING = true
+  })
+  audio.addEventListener('ended', () => {
+    IS_PLAYING = false
+    endAnimateTexures(textured_elements)
+  })
+  audio.addEventListener('pause', () => {
+    IS_PLAYING = false
+    endAnimateTexures(textured_elements)
+  })
 }
 
 audioPlayerToTextureMove()
-
 const INTERVALS = []
 
 function animateTexures(elements) {
