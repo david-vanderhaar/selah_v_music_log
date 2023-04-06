@@ -18,7 +18,10 @@
       >
     </section>
     <audio controls id="music-player"></audio>
-    <ul id="playlist"></ul>
+    <div class="playlist-container">
+      <ul id="playlist"></ul>
+    </div>
+    
     <script src="./src/aws.js"></script> 
     <script src="./src/visualFx.js"></script> 
     <script>
@@ -28,11 +31,9 @@
         client.addObjectsToPlaylist(objects)
       }
 
-      intialize()
-
       function test_initialize() {
         const playlist = document.getElementById('playlist');
-        Array(5).fill('test_track ').forEach((text, index) => {
+        Array(50).fill('test_track ').forEach((text, index) => {
           const title = text + index
           const alien_title = alien_text_v2(title)
           const id = title.split(' ').join('_')
@@ -50,6 +51,7 @@
         })
       }
 
+      intialize()
       // test_initialize()
     </script>
   </body>
