@@ -5,6 +5,24 @@
   --background-color: #101010;
 }
 
+@font-face {
+  font-family: 'Phudu';
+  src: url('./assets/fonts/Phudu/Phudu-VariableFont_wght.ttf') format('embedded-opentype'), /* Internet Explorer */
+       url('./assets/fonts/Phudu/Phudu-VariableFont_wght.ttf') format('woff2'),             /* Super Modern Browsers */
+       url('./assets/fonts/Phudu/Phudu-VariableFont_wght.ttf') format('woff'),              /* Pretty Modern Browsers */
+       url('./assets/fonts/Phudu/Phudu-VariableFont_wght.ttf') format('truetype'),          /* Safari, Android, iOS */
+       url('./assets/fonts/Phudu/Phudu-VariableFont_wght.ttf') format('svg');               /* Legacy iOS */
+}
+
+@font-face {
+  font-family: 'Space Mono';
+  src: url('./assets/fonts/Space_Mono/SpaceMono-Regular.ttf') format('embedded-opentype'), /* Internet Explorer */
+       url('./assets/fonts/Space_Mono/SpaceMono-Regular.ttf') format('woff2'),             /* Super Modern Browsers */
+       url('./assets/fonts/Space_Mono/SpaceMono-Regular.ttf') format('woff'),              /* Pretty Modern Browsers */
+       url('./assets/fonts/Space_Mono/SpaceMono-Regular.ttf') format('truetype'),          /* Safari, Android, iOS */
+       url('./assets/fonts/Space_Mono/SpaceMono-Regular.ttf') format('svg');               /* Legacy iOS */
+}
+
 body {
   font-family: 'Phudu', 'Space Mono', 'Open Sans', sans-serif;
   background-color: var(--background-color);
@@ -15,15 +33,17 @@ body {
 .playlist-title {
   font-size: 2.5rem;
   text-align: center;
-  color: var(--background-color);
+  color: var(--primary-color);
   font-weight: 600;
   margin-bottom: 10px;
+  /* -webkit-text-stroke: 1px var(--secondary-color); */
 }
 
 .playlist-subtitle {
   font-size: 1rem;
   text-align: center;
-  color: var(--background-color);
+  color: var(--primary-color);
+  /* -webkit-text-stroke: 1px var(--secondary-color); */
 }
 
 #playlist {
@@ -58,10 +78,12 @@ li {
 
 li:hover {
   /* background-color: var(--primary-color); */
-  outline: 1px solid var(--primary-color);
-  font-size: 20px;
-  margin: 20px 0;
+  /* outline: 1px solid var(--primary-color); */
+  border-bottom: 1px solid var(--primary-color);
+  /* font-size: 20px; */
+  /* margin: 20px 0; */
   padding: 1.2rem;
+  animation: blinker .9s;
 }
 
 .header {
@@ -83,4 +105,63 @@ li:hover {
   width: 100%;
   background-color: var(--primary-color);
   height: 300px;
+  /* mask-image: url('./assets/texture_2.png');
+  mask-size: contain;
+  -webkit-mask-image: url('./assets/texture_2.png');
+  -webkit-mask-size: contain; */
+}
+
+.texture {
+  mask-image: url('./assets/texture_2.png');
+  mask-size: contain;
+  -webkit-mask-image: url('./assets/texture_2.png');
+  -webkit-mask-size: contain;
+}
+
+
+.blink {
+  animation: blinker 3s;
+  animation-iteration-count: 1;
+}
+
+@keyframes blinker {
+  0% {
+    opacity: 0.2;
+  }
+  19% {
+    opacity: 0.2;
+  }
+  20% {
+    opacity: 1;
+  }
+  21% {
+    opacity: 1;
+  }
+  22% {
+    opacity: 0.2;
+  }
+  23% {
+    opacity: 0.2;
+  }
+  36% {
+    opacity: 0.2;
+  }
+  40% {
+    opacity: 1;
+  }
+  41% {
+    opacity: 0;
+  }
+  42% {
+    opacity: 1;
+  }
+  43% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
 }

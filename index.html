@@ -3,16 +3,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aws-sdk/2.1349.0/aws-sdk.min.js" integrity="sha512-UkZItCZku/xoMGtOrZWLpaY75t59lIoKboygn2zVA+ohng4kiVYJTQUEncZN+J6HE4ehR5IucdunfhDKJE2kwg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://unpkg.com/typed.js@2.0.15/dist/typed.umd.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Phudu:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="main.css">
   </head>
   <body>
-    <section class="header bubble">
-      <div class="playlist-subtitle">Music Log</div>
-      <div class="playlist-title">Selah VI</div>
+    <section class="header">
+      <div class="playlist-subtitle blink">Music Log</div>
+      <div class="playlist-title">Selah <span id="playlist-title-numeral"></span></div>
       <img
+        class="texture"
         src="assets/3D_Mars.png"
         alt="mars"
         height="200px"
@@ -22,6 +20,7 @@
     <audio controls id="music-player"></audio>
     <ul id="playlist"></ul>
     <script src="./src/aws.js"></script> 
+    <script src="./src/visualFx.js"></script> 
     <script>
       async function intialize() {
         const client = createClient()
@@ -35,14 +34,14 @@
         const playlist = document.getElementById('playlist');
         Array(5).fill('test_track ').forEach((text, index) => {
           const title = text + index
-          const alien_title = shuffleText(title)
+          const alien_title = alien_text_v2(title)
           const id = title.split(' ').join('_')
           const li = document.createElement('li');
           li.id = id
           playlist.appendChild(li);
           new Typed(`#${id}`, {
             strings: [alien_title, title],
-            typeSpeed: 10,
+            typeSpeed: Math.random() * 100,
             startDelay: Math.random() * 500,
             smartBackspace: true,
             backSpeed: 20,
