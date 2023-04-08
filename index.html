@@ -3,19 +3,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aws-sdk/2.1349.0/aws-sdk.min.js" integrity="sha512-UkZItCZku/xoMGtOrZWLpaY75t59lIoKboygn2zVA+ohng4kiVYJTQUEncZN+J6HE4ehR5IucdunfhDKJE2kwg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://unpkg.com/typed.js@2.0.15/dist/typed.umd.js"></script>
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/crt.css">
   </head>
-  <body>
+  <body class="crt">
     <section class="header">
       <div class="playlist-subtitle blink">Music Log</div>
       <div class="playlist-title">Selah <span id="playlist-title-numeral"></span></div>
-      <img
-        class="texture"
-        src="assets/3D_Mars.png"
-        alt="mars"
-        height="200px"
-        width="200px"
-      >
+      <div style="height: 200px; width: 200px;">
+        <img
+          class="texture"
+          src="assets/3D_Mars.png"
+          alt="mars"
+          height="200px"
+          width="200px"
+        >
+        <div id="locator" class="locator">
+          <span class="locator-circle"></span>
+          <span id="locator-text" class="locator-text"></span>
+        </div>
+      </div>
     </section>
     <audio controls id="music-player"></audio>
     <div class="playlist-container">
@@ -23,7 +30,7 @@
     </div>
     
     <script src="./src/aws.js"></script> 
-    <script src="./src/visualFx.js"></script> 
+    <script src="./src/audio.js"></script> 
     <script>
       async function intialize() {
         const client = createClient()

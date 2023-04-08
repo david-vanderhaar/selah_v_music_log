@@ -27,32 +27,42 @@ async function getAllObjects() {
   }
 }
 
+PLAYLIST_URLS = []
+PLAYLIST_INDEX = 0
+
 function addObjectsToPlaylist(objects) {
   const playlist = document.getElementById('playlist');
   objects.forEach(function(object, index) {
     const key = object.Key;
     const url = 'https://' + BUCKET + '.s3.amazonaws.com/' + key;
+    PLAYLIST_URLS.push(url)
     const li = document.createElement('li');
     const title = key.split('/').at(-1)
     if (title) {
-      const text = title.split('.')[0];
-      const alien_text = alien_text_v2(text)
       const id = 'track' + '-' + index
       li.id = id
       li.addEventListener('click', function() {
         const audio = document.getElementById('music-player');
         audio.src = url;
+        PLAYLIST_INDEX = index
         audio.play();
       });
       playlist.appendChild(li);
-      new Typed(`#${id}`, {
-        strings: [alien_text, text],
-        typeSpeed: Math.random() * 100,
-        startDelay: Math.random() * 500,
-        smartBackspace: true,
-        backSpeed: 20,
-        showCursor: false,
-      });
+      const text = title.split('.')[0];
+      const alien_text = alien_text_v2(text)
+
+      if (index <= 10) {
+        new Typed(`#${id}`, {
+          strings: [alien_text, text],
+          typeSpeed: Math.random() * 50,
+          startDelay: Math.random() * 500,
+          smartBackspace: true,
+          backSpeed: 20,
+          showCursor: false,
+        });
+      } else {
+        li.innerHTML = text
+      }
     }
   });
 }
@@ -82,6 +92,12 @@ function alien_text_v2(text) {
 
 function random(array) {
   return array[Math.floor(Math.random() * array.length)];
+}
+
+function range(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 const FONTS = {
