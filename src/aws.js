@@ -14,6 +14,9 @@ function getAwsS3Client() {
 function createClient() {
   return {
     getAllObjects,
+    getS3ObjectUrl,
+    getS3ObjectTitle,
+    getS3ObjectDate,
     addObjectsToPlaylist,
   }
 }
@@ -27,42 +30,57 @@ async function getAllObjects() {
   }
 }
 
+function getS3ObjectUrl(object) {
+  return 'https://' + BUCKET + '.s3.amazonaws.com/' + object.Key; 
+}
+
+function getS3ObjectTitle(object) {
+  try {
+    return object.Key.split('/').at(-1).split('.')[0]
+  } catch {
+    return null
+  }
+}
+
+function getS3ObjectDate(object) {
+
+}
+
+
 PLAYLIST_URLS = []
 PLAYLIST_INDEX = 0
 
 function addObjectsToPlaylist(objects) {
   const playlist = document.getElementById('playlist');
   objects.forEach(function(object, index) {
-    const key = object.Key;
-    const url = 'https://' + BUCKET + '.s3.amazonaws.com/' + key;
-    PLAYLIST_URLS.push(url)
+    const url = getS3ObjectUrl(object)
+    const title = getS3ObjectTitle(object)
+    if (!title) return
     const li = document.createElement('li');
-    const title = key.split('/').at(-1)
-    if (title) {
-      const id = 'track' + '-' + index
-      li.id = id
-      li.addEventListener('click', function() {
-        const audio = document.getElementById('music-player');
-        audio.src = url;
-        PLAYLIST_INDEX = index
-        audio.play();
-      });
-      playlist.appendChild(li);
-      const text = title.split('.')[0];
-      const alien_text = alien_text_v2(text)
+    PLAYLIST_URLS.push(url)
+    const playlist_index = PLAYLIST_URLS.length - 1
+    const id = 'track' + '-' + index
+    li.id = id
+    li.addEventListener('click', function() {
+      const audio = document.getElementById('music-player');
+      audio.src = url;
+      PLAYLIST_INDEX = playlist_index
+      audio.play();
+    });
+    playlist.appendChild(li);
+    const alien_text = alien_text_v2(title)
 
-      if (index <= 10) {
-        new Typed(`#${id}`, {
-          strings: [alien_text, text],
-          typeSpeed: Math.random() * 50,
-          startDelay: Math.random() * 500,
-          smartBackspace: true,
-          backSpeed: 20,
-          showCursor: false,
-        });
-      } else {
-        li.innerHTML = text
-      }
+    if (index <= 10) {
+      new Typed(`#${id}`, {
+        strings: [alien_text, title],
+        typeSpeed: Math.random() * 20,
+        startDelay: Math.random() * 500,
+        smartBackspace: true,
+        backSpeed: 20,
+        showCursor: false,
+      });
+    } else {
+      li.innerHTML = title
     }
   });
 }

@@ -191,18 +191,31 @@ li:hover {
 .locator-circle {
   border: 1px solid var(--secondary-color);
   background-color: transparent;
-  height: 10;
+  height: 15;
   border-radius:50%;
-  width: 10;
+  width: 15;
   display: block;
   top: 8px;
   position: relative;
 }
 
+.locator-circle--inner {
+  border: 1px solid var(--secondary-color);
+  background-color: var(--secondary-color);
+  height: 5;
+  border-radius: 50%;
+  width: 5;
+  display: block;
+  top: 13px;
+  left: 12px;
+  position: relative;
+  animation: blinker 10s infinite reverse;
+}
+
 .locator-text {
   border-bottom: 1px solid var(--secondary-color);
   color: var(--secondary-color);
-  padding-left: 10px;
+  padding-left: 20px;
   font-size: 11px;
 }
 
@@ -211,4 +224,5 @@ li:hover {
   position: relative;
   visibility: hidden;
   transition: all ease .5s;
+  width: max-content;
 }

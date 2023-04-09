@@ -1,10 +1,14 @@
-new Typed('#playlist-title-numeral', {
-  strings: [alien_text_v2('123'), alien_text_v2('V'), 'V'],
-  typeSpeed: Math.random() * 100,
-  startDelay: Math.random() * 500,
-  backSpeed: 20,
-  showCursor: false,
-});
+animatePageTitle()
+
+function animatePageTitle() {
+  new Typed('#playlist-title-numeral', {
+    strings: [alien_text_v2('123'), alien_text_v2('V'), 'V'],
+    typeSpeed: Math.random() * 100,
+    startDelay: Math.random() * 500,
+    backSpeed: 20,
+    showCursor: false,
+  });
+}
 
 
 let IS_PLAYING = false
@@ -13,8 +17,6 @@ function audioPlayerToTextureMove() {
   const audio = document.getElementById('music-player');
   const locatorUI = document.getElementById('locator');
   const locatorText = document.getElementById('locator-text');
-  console.log(locatorText);
-  console.log(locatorUI);
   const textured_elements = document.getElementsByClassName('texture')
   audio.addEventListener('play', (event) => {
     if (!IS_PLAYING) animateTexures(textured_elements)
@@ -50,10 +52,10 @@ function animateTexures(elements) {
     const interval = setInterval(() => {
       // rotate image
       let current = 0
-      const match = element.style.transform.match(/\d+/)
+      const match = element.style.transform.match(/[+-]?([0-9]*[.])?[0-9]+/)
       if (match) current = parseFloat(match[0])
       if (current > 360) current = 0
-      element.style.transform = `rotate(${current + 0.7}deg)`
+      element.style.transform = `rotate(${current + 0.1}deg)`
 
       // animate texture
       let maskX = 0
