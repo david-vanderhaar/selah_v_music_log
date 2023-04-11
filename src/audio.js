@@ -90,6 +90,7 @@ function getPlayer() {
     is_playing: IS_PLAYING,
     play,
     pause,
-    toggle
+    toggle,
+    getPlaylistUrls: () => PLAYLIST_URLS
   }
 }

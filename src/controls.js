@@ -1,4 +1,5 @@
 initializePlayButton()
+initializeShuffleButton()
 initializePlaytimeProgress()
 
 function initializePlayButton() {
@@ -10,6 +11,25 @@ function initializePlayButton() {
   button.addEventListener("touch", function(evt) {
     evt.preventDefault()
     getPlayer().toggle()
+  });
+}
+
+function initializeShuffleButton() {
+  const button = document.querySelector("#shuffle-button");
+  const playRandom = () => {
+    const player = getPlayer()
+    const random_song = random(player.getPlaylistUrls())
+    PLAYLIST_INDEX = player.getPlaylistUrls().findIndex((url) => url === random_song)
+    player.element.src = random_song
+    player.play()
+  }
+  button.addEventListener("click", function(evt) {
+    evt.preventDefault()
+    playRandom()
+  });
+  button.addEventListener("touch", function(evt) {
+    evt.preventDefault()
+    playRandom()
   });
 }
 
