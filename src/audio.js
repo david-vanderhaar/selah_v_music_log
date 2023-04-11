@@ -26,6 +26,7 @@ function audioPlayerToTextureMove() {
     locatorUI.style.visibility = 'visible'
     locatorUI.style.top = `${range(-78, -37)}%`
     locatorUI.style.left = `${range(4, 94)}%`
+    animatePlayButton()
   })
   audio.addEventListener('ended', () => {
     IS_PLAYING = false
@@ -40,6 +41,7 @@ function audioPlayerToTextureMove() {
   audio.addEventListener('pause', () => {
     IS_PLAYING = false
     endAnimateTexures(textured_elements)
+    animatePauseButton()
   })
 }
 
@@ -73,4 +75,21 @@ function animateTexures(elements) {
 
 function endAnimateTexures(elements) {
   INTERVALS.forEach((interval) => clearInterval(interval))
+}
+
+function getPlayer() {
+  const audio = document.getElementById('music-player');
+  const play = () => {
+    if (!audio.src) audio.src = PLAYLIST_URLS[PLAYLIST_INDEX]
+    audio.play()
+  }
+  const pause = () => audio.pause()
+  const toggle = () => IS_PLAYING ? pause() : play()
+  return {
+    element: audio,
+    is_playing: IS_PLAYING,
+    play,
+    pause,
+    toggle
+  }
 }

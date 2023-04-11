@@ -1,0 +1,20 @@
+.control-button {
+  color: var(--tertiary-color);
+  cursor: pointer;
+  padding: 20px;
+}
+
+.control-button:hover {
+  color: var(--secondary-color);
+}
+
+#planet > svg {
+  animation: blinker 10s infinite reverse;
+  animation-delay: 5s;
+}
+
+.controls-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}

@@ -1,7 +1,7 @@
 :root {
   --primary-color: #e6734f;
   --secondary-color: #e5ca9f;
-  --text-color: #e5ca9f;
+  --tertiary-color: #b84b2d;
   --background-color: #10101f;
 }
 
@@ -225,4 +225,5 @@ li:hover {
   visibility: hidden;
   transition: all ease .5s;
   width: max-content;
+  z-index: 2;
 }
