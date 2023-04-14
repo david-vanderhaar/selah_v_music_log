@@ -1,6 +1,7 @@
 initializePlayButton()
 initializeShuffleButton()
 initializePlaytimeProgress()
+initializeVolumeControl()
 
 function initializePlayButton() {
   const button = document.querySelector("#play-button");
@@ -41,6 +42,20 @@ function animatePlayButton() {
 function animatePauseButton() {
   const button = document.querySelector("#play-button");
   button.innerHTML = 'play_circle'
+}
+
+function initializeVolumeControl() {
+  const player_element = getPlayer().element
+  const input = document.querySelector('#volume-slider')
+  input.addEventListener('input', (event) => {
+    const new_volume = parseFloat(event.target.value)
+    player_element.volume = new_volume
+  })
+
+  player_element.addEventListener('volumechange', (event) => {
+    const new_volume = event.target.volume
+    input.value = `${new_volume}`
+  })
 }
 
 function initializePlaytimeProgress() {
