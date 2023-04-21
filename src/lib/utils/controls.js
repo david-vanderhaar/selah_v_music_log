@@ -1,9 +1,6 @@
-initializePlayButton()
-initializeShuffleButton()
-initializePlaytimeProgress()
-initializeVolumeControl()
+import ProgressBar from 'progressbar.js'
 
-function initializePlayButton() {
+export function initializePlayButton(getPlayer) {
   const button = document.querySelector("#play-button");
   button.addEventListener("click", function(evt) {
     evt.preventDefault()
@@ -15,36 +12,29 @@ function initializePlayButton() {
   });
 }
 
-function initializeShuffleButton() {
+export function initializeShuffleButton(getPlayer) {
   const button = document.querySelector("#shuffle-button");
-  const playRandom = () => {
-    const player = getPlayer()
-    const random_song = random(player.getPlaylistUrls())
-    PLAYLIST_INDEX = player.getPlaylistUrls().findIndex((url) => url === random_song)
-    player.element.src = random_song
-    player.play()
-  }
   button.addEventListener("click", function(evt) {
     evt.preventDefault()
-    playRandom()
+    getPlayer().playRandom()
   });
   button.addEventListener("touch", function(evt) {
     evt.preventDefault()
-    playRandom()
+    getPlayer().playRandom()
   });
 }
 
-function animatePlayButton() {
+export function animatePlayButton() {
   const button = document.querySelector("#play-button");
   button.innerHTML = 'pause_circle'
 }
 
-function animatePauseButton() {
+export function animatePauseButton() {
   const button = document.querySelector("#play-button");
   button.innerHTML = 'play_circle'
 }
 
-function initializeVolumeControl() {
+export function initializeVolumeControl(getPlayer) {
   const player_element = getPlayer().element
   const input = document.querySelector('#volume-slider')
   input.addEventListener('input', (event) => {
@@ -58,7 +48,7 @@ function initializeVolumeControl() {
   })
 }
 
-function initializePlaytimeProgress() {
+export function initializePlaytimeProgress(getPlayer) {
   const circle = new ProgressBar.Circle('#planet', {
     easing: 'easeInOut',
     color: '#b84b2d',
@@ -89,5 +79,4 @@ function initializePlaytimeProgress() {
     const percent = player_element.currentTime / player_element.duration
     circle.animate(percent, {duration: 200});  // Value from 0.0 to 1.0
   })
-
 }

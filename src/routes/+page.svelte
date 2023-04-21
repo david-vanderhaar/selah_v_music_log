@@ -1,28 +1,27 @@
 <script>
   import { onMount } from 'svelte';
+  import Typed from 'typed.js'
+  import Playlist from '../lib/components/Playlist.svelte'
+	import { alien_text_v2 } from '../lib/helper';
 
   onMount(() => {
     import('../lib/styles/main.css')
-  import('../lib/styles/controls.css')
-  import('../lib/styles/crt.css')
-  import('../lib/src/aws.js')
-  import('../lib/src/audio.js')
-  import('../lib/src/controls.js')
-  import('../lib/src/initialize.js')
-  // import('../lib/styles/main.css').then(() => {
-  //   import('../lib/styles/controls.css')
-  // }).then(() => {
-  //   import('../lib/styles/crt.css')
-  // }).then(() => {
-  //   import('../lib/src/aws.js')
-  // }).then(() => {
-  //   import('../lib/src/audio.js')
-  // }).then(() => {
-  //   import('../lib/src/controls.js')
-  // }).then(() => {
-  //   import('../lib/src/initialize.js')
-  // })
-});
+    import('../lib/styles/controls.css')
+    import('../lib/styles/crt.css')
+    import('../lib/utils/audio.js')
+
+    animatePageTitle()
+  });
+
+  function animatePageTitle() {
+    new Typed('#playlist-title-numeral', {
+      strings: [alien_text_v2('123'), alien_text_v2('V'), 'V'],
+      typeSpeed: Math.random() * 100,
+      startDelay: Math.random() * 500,
+      backSpeed: 20,
+      showCursor: false,
+    });
+  }
 </script>
 
 <div class="crt">
@@ -66,7 +65,5 @@
   <div class="controls">
     <audio id="music-player"></audio>
   </div>
-  <div class="playlist-container">
-    <ul id="playlist"></ul>
-  </div>
+  <Playlist />
 </div>

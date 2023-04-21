@@ -1,17 +1,14 @@
-animatePageTitle()
-
-function animatePageTitle() {
-  new Typed('#playlist-title-numeral', {
-    strings: [alien_text_v2('123'), alien_text_v2('V'), 'V'],
-    typeSpeed: Math.random() * 100,
-    startDelay: Math.random() * 500,
-    backSpeed: 20,
-    showCursor: false,
-  });
-}
-
+import { range } from "../helper.js";
+import { playlistStore } from "../stores/playlistStore.js";
+import * as Controls from './controls.js';
 
 let IS_PLAYING = false
+
+audioPlayerToTextureMove()
+Controls.initializePlayButton(getPlayer)
+Controls.initializeShuffleButton(getPlayer)
+Controls.initializePlaytimeProgress(getPlayer)
+Controls.initializeVolumeControl(getPlayer)
 
 function audioPlayerToTextureMove() {
   const audio = document.getElementById('music-player');
@@ -26,7 +23,7 @@ function audioPlayerToTextureMove() {
     locatorUI.style.visibility = 'visible'
     locatorUI.style.top = `${range(-78, -37)}%`
     locatorUI.style.left = `${range(4, 94)}%`
-    animatePlayButton()
+    Controls.animatePlayButton()
   })
   audio.addEventListener('ended', () => {
     IS_PLAYING = false
@@ -41,11 +38,10 @@ function audioPlayerToTextureMove() {
   audio.addEventListener('pause', () => {
     IS_PLAYING = false
     endAnimateTexures(textured_elements)
-    animatePauseButton()
+    Controls.animatePauseButton()
   })
 }
 
-audioPlayerToTextureMove()
 const INTERVALS = []
 
 function animateTexures(elements) {
@@ -77,20 +73,25 @@ function endAnimateTexures(elements) {
   INTERVALS.forEach((interval) => clearInterval(interval))
 }
 
-function getPlayer() {
+export function getPlayer() {
   const audio = document.getElementById('music-player');
   const play = () => {
-    if (!audio.src) audio.src = PLAYLIST_URLS[PLAYLIST_INDEX]
+    if (!audio.src) audio.src = playlistStore.getCurrentTrack().url
     audio.play()
   }
   const pause = () => audio.pause()
   const toggle = () => IS_PLAYING ? pause() : play()
+  const playRandom = () => {
+    const random_song = playlistStore.getRandomTrack().url
+    audio.src = random_song
+    audio.play()
+  }
   return {
     element: audio,
     is_playing: IS_PLAYING,
     play,
+    playRandom,
     pause,
     toggle,
-    getPlaylistUrls: () => PLAYLIST_URLS
   }
 }
