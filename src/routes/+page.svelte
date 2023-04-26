@@ -29,6 +29,9 @@
     <div class="playlist-subtitle blink">Music Log</div>
     <div class="playlist-title">Selah <span id="playlist-title-numeral"></span></div>
     <div class="controls-row">
+      <span id="previous-button" class="control-button material-symbols-outlined">
+        navigate_before
+      </span>
       <span id="play-button" class="control-button material-symbols-outlined">
         play_circle
       </span>
@@ -43,11 +46,14 @@
         <div id="locator" class="locator">
           <span class="locator-circle--inner"></span>
           <span class="locator-circle"></span>
-          <span id="locator-text" class="locator-text">asddsgwefwfsdf</span>
+          <span id="locator-text" class="locator-text"></span>
         </div>
       </div>
       <span id="shuffle-button" class="control-button material-symbols-outlined">
         scatter_plot
+      </span>
+      <span id="next-button" class="control-button material-symbols-outlined">
+        navigate_next
       </span>
     </div>
     <div class="slidecontainer">

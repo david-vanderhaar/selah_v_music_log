@@ -9,6 +9,8 @@ Controls.initializePlayButton(getPlayer)
 Controls.initializeShuffleButton(getPlayer)
 Controls.initializePlaytimeProgress(getPlayer)
 Controls.initializeVolumeControl(getPlayer)
+Controls.initializePreviousButton(getPlayer)
+Controls.initializeNextButton(getPlayer)
 
 function audioPlayerToTextureMove() {
   const audio = document.getElementById('music-player');
@@ -28,12 +30,7 @@ function audioPlayerToTextureMove() {
   audio.addEventListener('ended', () => {
     IS_PLAYING = false
     endAnimateTexures(textured_elements)
-
-    const next = (PLAYLIST_INDEX + 1) % PLAYLIST_URLS.length;
-    const nextUrl = PLAYLIST_URLS[next] 
-    PLAYLIST_INDEX = next
-    audio.src = nextUrl;
-    audio.play();
+    playlistStore.setTrack(playlistStore.getNextTrack().id)
   })
   audio.addEventListener('pause', () => {
     IS_PLAYING = false
@@ -76,20 +73,26 @@ function endAnimateTexures(elements) {
 export function getPlayer() {
   const audio = document.getElementById('music-player');
   const play = () => {
-    if (!audio.src) audio.src = playlistStore.getCurrentTrack().url
+    if (!audio.src) playlistStore.setTrack(playlistStore.getCurrentTrack().id)
     audio.play()
   }
   const pause = () => audio.pause()
   const toggle = () => IS_PLAYING ? pause() : play()
   const playRandom = () => {
-    const random_song = playlistStore.getRandomTrack().url
-    audio.src = random_song
-    audio.play()
+    playlistStore.setTrack(playlistStore.getRandomTrack().id)
+  }
+  const playNext = () => {
+    playlistStore.setTrack(playlistStore.getNextTrack().id)
+  }
+  const playPrevious = () => {
+    playlistStore.setTrack(playlistStore.getPreviousTrack().id)
   }
   return {
     element: audio,
     is_playing: IS_PLAYING,
     play,
+    playNext,
+    playPrevious,
     playRandom,
     pause,
     toggle,

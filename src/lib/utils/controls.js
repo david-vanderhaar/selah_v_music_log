@@ -24,6 +24,30 @@ export function initializeShuffleButton(getPlayer) {
   });
 }
 
+export function initializePreviousButton(getPlayer) {
+  const button = document.querySelector("#previous-button");
+  button.addEventListener("click", function(evt) {
+    evt.preventDefault()
+    getPlayer().playPrevious()
+  });
+  button.addEventListener("touch", function(evt) {
+    evt.preventDefault()
+    getPlayer().playPrevious()
+  });
+}
+
+export function initializeNextButton(getPlayer) {
+  const button = document.querySelector("#next-button");
+  button.addEventListener("click", function(evt) {
+    evt.preventDefault()
+    getPlayer().playNext()
+  });
+  button.addEventListener("touch", function(evt) {
+    evt.preventDefault()
+    getPlayer().playNext()
+  });
+}
+
 export function animatePlayButton() {
   const button = document.querySelector("#play-button");
   button.innerHTML = 'pause_circle'

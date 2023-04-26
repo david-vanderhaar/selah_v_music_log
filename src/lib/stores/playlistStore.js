@@ -43,6 +43,25 @@ function getCurrentTrackById(tracks, id) {
   return null
 }
 
+function getNextTrack() {
+  const current = getCurrentTrack()
+  const index = currentValue.tracks.findIndex((item) => {
+    return item.id === current.id
+  })
+  const next = currentValue.tracks[(index + 1) % currentValue.tracks.length]
+  return next
+}
+
+function getPreviousTrack() {
+  const current = getCurrentTrack()
+  const index = currentValue.tracks.findIndex((item) => {
+    return item.id === current.id
+  })
+  const prevIndex = (index - 1 + currentValue.tracks.length) % currentValue.tracks.length
+  const next = currentValue.tracks[prevIndex]
+  return next
+}
+
 function findUrlFromTrackId(tracks, id) {
   const track = getCurrentTrackById(tracks, id)
   if (track) return track.url
@@ -106,4 +125,6 @@ export const playlistStore = {
   setTrack,
   getCurrentTrack,
   getRandomTrack,
+  getNextTrack,
+  getPreviousTrack,
 }
