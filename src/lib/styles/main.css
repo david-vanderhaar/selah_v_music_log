@@ -7,20 +7,20 @@
 
 @font-face {
   font-family: 'Phudu';
-  src: url('../../assets/fonts/Phudu/Phudu-VariableFont_wght.ttf') format('embedded-opentype'), /* Internet Explorer */
-       url('../../assets/fonts/Phudu/Phudu-VariableFont_wght.ttf') format('woff2'),             /* Super Modern Browsers */
-       url('../../assets/fonts/Phudu/Phudu-VariableFont_wght.ttf') format('woff'),              /* Pretty Modern Browsers */
-       url('../../assets/fonts/Phudu/Phudu-VariableFont_wght.ttf') format('truetype'),          /* Safari, Android, iOS */
-       url('../../assets/fonts/Phudu/Phudu-VariableFont_wght.ttf') format('svg');               /* Legacy iOS */
+  src: url('$lib/assets/fonts/Phudu/Phudu-VariableFont_wght.ttf') format('embedded-opentype'), /* Internet Explorer */
+       url('$lib/assets/fonts/Phudu/Phudu-VariableFont_wght.ttf') format('woff2'),             /* Super Modern Browsers */
+       url('$lib/assets/fonts/Phudu/Phudu-VariableFont_wght.ttf') format('woff'),              /* Pretty Modern Browsers */
+       url('$lib/assets/fonts/Phudu/Phudu-VariableFont_wght.ttf') format('truetype'),          /* Safari, Android, iOS */
+       url('$lib/assets/fonts/Phudu/Phudu-VariableFont_wght.ttf') format('svg');               /* Legacy iOS */
 }
 
 @font-face {
   font-family: 'Space Mono';
-  src: url('../../assets/fonts/Space_Mono/SpaceMono-Regular.ttf') format('embedded-opentype'), /* Internet Explorer */
-       url('../../assets/fonts/Space_Mono/SpaceMono-Regular.ttf') format('woff2'),             /* Super Modern Browsers */
-       url('../../assets/fonts/Space_Mono/SpaceMono-Regular.ttf') format('woff'),              /* Pretty Modern Browsers */
-       url('../../assets/fonts/Space_Mono/SpaceMono-Regular.ttf') format('truetype'),          /* Safari, Android, iOS */
-       url('../../assets/fonts/Space_Mono/SpaceMono-Regular.ttf') format('svg');               /* Legacy iOS */
+  src: url('$lib/assets/fonts/Space_Mono/SpaceMono-Regular.ttf') format('embedded-opentype'), /* Internet Explorer */
+       url('$lib/assets/fonts/Space_Mono/SpaceMono-Regular.ttf') format('woff2'),             /* Super Modern Browsers */
+       url('$lib/assets/fonts/Space_Mono/SpaceMono-Regular.ttf') format('woff'),              /* Pretty Modern Browsers */
+       url('$lib/assets/fonts/Space_Mono/SpaceMono-Regular.ttf') format('truetype'),          /* Safari, Android, iOS */
+       url('$lib/assets/fonts/Space_Mono/SpaceMono-Regular.ttf') format('svg');               /* Legacy iOS */
 }
 
 body {
@@ -124,16 +124,16 @@ li:hover {
   width: 100%;
   background-color: var(--primary-color);
   height: 300px;
-  /* mask-image: url('../../assets/texture_2.png');
+  /* mask-image: url('$lib/assets/texture_2.png');
   mask-size: contain;
-  -webkit-mask-image: url('../../assets/texture_2.png');
+  -webkit-mask-image: url('$lib/assets/texture_2.png');
   -webkit-mask-size: contain; */
 }
 
 .texture {
-  mask-image: url('../../assets/texture_2.png');
+  mask-image: url('$lib/assets/texture_2.png');
   mask-size: contain;
-  -webkit-mask-image: url('../../assets/texture_2.png');
+  -webkit-mask-image: url('$lib/assets/texture_2.png');
   -webkit-mask-size: contain;
 }
 

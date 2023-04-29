@@ -3,11 +3,9 @@
   import Typed from 'typed.js'
   import Playlist from "$lib/components/Playlist.svelte";
 	import { alien_text_v2 } from "$lib/helper";
-
+  import {assets} from '$app/paths';
+  
   onMount(() => {
-    // import('$lib/styles/main.css')
-    // import('$lib/styles/controls.css')
-    // import('$lib/styles/crt.css')
     import('$lib/utils/audio.js')
     animatePageTitle()
   });
@@ -23,12 +21,6 @@
   }
 </script>
 
-<style>
-  @import '$lib/styles/main.css';
-  @import '$lib/styles/controls.css';
-  @import '$lib/styles/crt.css';
-</style>
-
 <div class="crt">
   <section class="header">
     <div class="playlist-subtitle blink">Music Log</div>
@@ -43,7 +35,7 @@
       <div style="height: 200px; width: 200px;" id="planet">
         <img
           class="texture"
-          src="assets/3D_Mars.png"
+          src="{assets}/assets/3D_Mars.png"
           alt="mars"
           height="200px"
           width="200px"
