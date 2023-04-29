@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+		<link rel="stylesheet" href="./styles/main.css">
+		<link rel="stylesheet" href="./styles/controls.css">
+		<link rel="stylesheet" href="./styles/crt.css">
+		<meta http-equiv="content-security-policy" content="">
+		<link rel="modulepreload" href="./_app/immutable/start-2f589491.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index-0a3a5157.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons-92863806.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/paths-a0ccfbbf.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/preload-helper-41c905a7.js">
+		<link rel="modulepreload" href="./_app/immutable/components/layout.svelte-b1814435.js">
+		<link rel="modulepreload" href="./_app/immutable/modules/pages/_layout.js-9cbb603b.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/_layout-da46b06b.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/_page.svelte-ee3fc4f9.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/_page-15ab859c.js">
+	</head>
+	<body data-sveltekit-preload-data="hover">
+    <div style="display: contents">
+      
+
+
+<div class="crt"><section class="header"><div class="playlist-subtitle blink">Music Log</div>
+    <div class="playlist-title">Selah <span id="playlist-title-numeral"></span></div>
+    <div class="controls-row"><span id="previous-button" class="control-button material-symbols-outlined">navigate_before
+      </span>
+      <span id="play-button" class="control-button material-symbols-outlined">play_circle
+      </span>
+      <div style="height: 200px; width: 200px;" id="planet"><img class="texture" src="/assets/3D_Mars.png" alt="mars" height="200px" width="200px">
+        <div id="locator" class="locator"><span class="locator-circle--inner"></span>
+          <span class="locator-circle"></span>
+          <span id="locator-text" class="locator-text"></span></div></div>
+      <span id="shuffle-button" class="control-button material-symbols-outlined">scatter_plot
+      </span>
+      <span id="next-button" class="control-button material-symbols-outlined">navigate_next
+      </span></div>
+    <div class="slidecontainer"><input type="range" min="0" max="1" value="1" step="0.01" class="slider" id="volume-slider"></div></section>
+  <div class="controls"><audio id="music-player"></audio></div>
+  <div class="playlist-container"><ul id="playlist">
+      <li>Loading...</li>
+    </ul></div></div>
+
+
+		<script type="module" data-sveltekit-hydrate="92fe3u">
+			import { start } from "./_app/immutable/start-2f589491.js";
+
+			start({
+				assets: "",
+				env: {},
+				target: document.querySelector('[data-sveltekit-hydrate="92fe3u"]').parentNode,
+				version: "1682809133242",
+				hydrate: {
+					node_ids: [0, 2],
+					data: [null,null],
+					form: null,
+					error: null
+				}
+			});
+		</script>
+	
+    </div>
+	</body>
+</html>
