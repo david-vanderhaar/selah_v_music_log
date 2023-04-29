@@ -1,8 +1,8 @@
 <script>
 	import { onMount } from "svelte";
 	import Typed from "typed.js";
-	import { alien_text_v2 } from "../helper";
-	import { playlistStore } from "../stores/playlistStore";
+	import { alien_text_v2 } from "$lib/helper";
+	import { playlistStore } from "$lib/stores/playlistStore";
 
   export let track_id;
   export let title;

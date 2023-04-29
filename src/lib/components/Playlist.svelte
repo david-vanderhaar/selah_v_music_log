@@ -1,7 +1,7 @@
 <script>
   import { onDestroy } from 'svelte';
-  import { playlistStore, initializePlaylist } from '../stores/playlistStore';
-  import PlaylistItem from './PlaylistItem.svelte';
+  import { playlistStore, initializePlaylist } from '$lib/stores/playlistStore';
+  import PlaylistItem from '$lib/components/PlaylistItem.svelte';
 
   let items = [];
 

@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store';
-import { delay, random } from '../helper';
-import * as AWS from '../utils/aws'
+import { delay, random } from '$lib/helper';
+import * as AWS from '$lib/utils/aws'
 
 const initialValue = {
   tracks: [],

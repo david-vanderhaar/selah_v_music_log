@@ -1,6 +1,6 @@
-import { range } from "../helper.js";
-import { playlistStore } from "../stores/playlistStore.js";
-import * as Controls from './controls.js';
+import { range } from "$lib/helper.js";
+import { playlistStore } from "$lib/stores/playlistStore.js";
+import * as Controls from '$lib/utils/controls.js';
 
 let IS_PLAYING = false
 

@@ -1,15 +1,14 @@
 <script>
   import { onMount } from 'svelte';
   import Typed from 'typed.js'
-  import Playlist from '../lib/components/Playlist.svelte'
-	import { alien_text_v2 } from '../lib/helper';
+  import Playlist from "$lib/components/Playlist.svelte";
+	import { alien_text_v2 } from "$lib/helper";
 
   onMount(() => {
-    import('../lib/styles/main.css')
-    import('../lib/styles/controls.css')
-    import('../lib/styles/crt.css')
-    import('../lib/utils/audio.js')
-
+    // import('$lib/styles/main.css')
+    // import('$lib/styles/controls.css')
+    // import('$lib/styles/crt.css')
+    import('$lib/utils/audio.js')
     animatePageTitle()
   });
 
@@ -23,6 +22,12 @@
     });
   }
 </script>
+
+<style>
+  @import '$lib/styles/main.css';
+  @import '$lib/styles/controls.css';
+  @import '$lib/styles/crt.css';
+</style>
 
 <div class="crt">
   <section class="header">
