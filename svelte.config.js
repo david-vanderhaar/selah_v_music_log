@@ -4,9 +4,9 @@ import adapter from '@sveltejs/adapter-static';
 const config = {
 	kit: {
 		adapter: adapter(),
-    // paths: {
-    //   base: process.env.NODE_ENV === "production" ? "/selah_v_music_log" : "",
-    // },
+    paths: {
+      base: process.env.NODE_ENV === "production" ? "/selah_v_music_log" : "",
+    },
 	},
 };
 

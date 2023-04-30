@@ -2,7 +2,7 @@ import AWS from 'aws-sdk';
 
 const BUCKET = 'selah-v'
 const PREFIX = 'tapes/chronological/';
-const S3_CLIENT = getAwsS3Client()
+// const S3_CLIENT = getAwsS3Client()
 
 function getAwsS3Client() {
   AWS.config.region = 'us-east-1';
@@ -24,6 +24,7 @@ export function createClient() {
 
 async function getAllObjects() {
   try {
+    const S3_CLIENT = getAwsS3Client()
     const response = await S3_CLIENT.listObjects({Prefix: PREFIX}).promise()
     return response.Contents
   } catch (error) {

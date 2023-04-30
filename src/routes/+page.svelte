@@ -3,7 +3,7 @@
   import Typed from 'typed.js'
   import Playlist from "$lib/components/Playlist.svelte";
 	import { alien_text_v2 } from "$lib/helper";
-  import {assets} from '$app/paths';
+  import {base} from '$app/paths';
   
   onMount(() => {
     import('$lib/utils/audio.js')
@@ -35,7 +35,7 @@
       <div style="height: 200px; width: 200px;" id="planet">
         <img
           class="texture"
-          src="{assets}/assets/3D_Mars.png"
+          src="{base}/assets/3D_Mars.png"
           alt="mars"
           height="200px"
           width="200px"
