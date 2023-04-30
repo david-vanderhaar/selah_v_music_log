@@ -1,7 +1,7 @@
 .control-button {
   color: var(--tertiary-color);
   cursor: pointer;
-  padding: 20px;
+  padding: 6px;
 }
 
 .control-button:hover {

@@ -1,5 +1,7 @@
 initializePlayButton()
 initializeShuffleButton()
+initializeNextButton()
+initializePrevButton()
 initializePlaytimeProgress()
 initializeVolumeControl()
 
@@ -33,6 +35,60 @@ function initializeShuffleButton() {
     playRandom()
   });
 }
+
+
+function initializeNextButton() {
+  const button = document.querySelector("#next-button");
+  const playNext = () => {
+    const player = getPlayer()
+    PLAYLIST_INDEX = PLAYLIST_INDEX + 1
+    if (PLAYLIST_INDEX >= player.getPlaylistUrls().length) {
+      PLAYLIST_INDEX = 0
+    }
+    player.element.src = player.getPlaylistUrls()[PLAYLIST_INDEX]
+    player.play()
+  }
+  button.addEventListener("click", function(evt) {
+    evt.preventDefault()
+    playNext()
+  })
+  button.addEventListener("touch", function(evt) {
+    evt.preventDefault()
+    playNext()
+  })
+
+  document.addEventListener('swiped-right', function(evt) {
+    evt.preventDefault()
+    playNext()
+  });
+}
+
+function initializePrevButton() {
+  const button = document.querySelector("#prev-button");
+  const playPrev = () => {
+    const player = getPlayer()
+    PLAYLIST_INDEX = PLAYLIST_INDEX - 1
+    if (PLAYLIST_INDEX < 0) {
+      PLAYLIST_INDEX = player.getPlaylistUrls().length - 1
+    }
+    player.element.src = player.getPlaylistUrls()[PLAYLIST_INDEX]
+    player.play()
+  }
+  button.addEventListener("click", function(evt) {
+    evt.preventDefault()
+    playPrev()
+  })
+  button.addEventListener("touch", function(evt) {
+    evt.preventDefault()
+    playPrev()
+  })
+
+  document.addEventListener('swiped-left', function(evt) {
+    evt.preventDefault()
+    playPrev()
+  });
+}
+
 
 function animatePlayButton() {
   const button = document.querySelector("#play-button");
