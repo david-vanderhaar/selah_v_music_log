@@ -57,7 +57,7 @@ function initializeNextButton() {
     playNext()
   })
 
-  document.addEventListener('swiped-right', function(evt) {
+  document.addEventListener('swiped-left', function(evt) {
     evt.preventDefault()
     playNext()
   });
@@ -83,7 +83,7 @@ function initializePrevButton() {
     playPrev()
   })
 
-  document.addEventListener('swiped-left', function(evt) {
+  document.addEventListener('swiped-right', function(evt) {
     evt.preventDefault()
     playPrev()
   });
