@@ -5,7 +5,13 @@
   "main": "index.js",
   "scripts": {
     "start": "live-server",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build_itch": "zip -r builds/itch.zip ./assets ./src ./styles ./index.html",
+    "deploy_itch": "./butler/butler push ./builds/itch.zip classicwook/selah-v-music-log:web",
+    "publish_itch": "npm run build_itch && npm run deploy_itch",
+    "build": "npm run build_itch",
+    "deploy": "npm run deploy_itch",
+    "publish": "npm run publish_itch"
   },
   "keywords": [],
   "author": "",

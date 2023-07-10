@@ -2,3 +2,8 @@
 .svelte-kit/
 build/
 node_modules/
+builds/
+builds/*
+butler/
+butler/*
+.DS_Store
