@@ -21,7 +21,7 @@ function audioPlayerToTextureMove() {
   audio.addEventListener('play', (event) => {
     if (!IS_PLAYING) animateTexures(textured_elements)
     IS_PLAYING = true
-    const text = audio.src.split('/').at(-1).split('.')[0]
+    const text = audio.src.split('/').at(-1).split('.')[0].replace(/\*\*/g, '')
     locatorText.innerHTML = text
     locatorUI.style.visibility = 'visible'
     locatorUI.style.top = `${range(-78, -37)}%`
