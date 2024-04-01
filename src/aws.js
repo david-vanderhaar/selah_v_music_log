@@ -36,7 +36,8 @@ function getS3ObjectUrl(object) {
 
 function getS3ObjectTitle(object) {
   try {
-    return object.Key.split('/').at(-1).split('.')[0]
+    // without last two ** which denote it's one of my favorite tracks
+    return object.Key.split('/').at(-1).split('.')[0].replace(/\*\*/g, '')
   } catch {
     return null
   }
@@ -46,6 +47,9 @@ function getS3ObjectDate(object) {
 
 }
 
+function getIsFavorite(object) {
+  return object.Key.split('/').at(-1).split('.')[0].endsWith('**')
+}
 
 PLAYLIST_URLS = []
 PLAYLIST_INDEX = 0
@@ -61,6 +65,7 @@ function addObjectsToPlaylist(objects) {
     const playlist_index = PLAYLIST_URLS.length - 1
     const id = 'track' + '-' + index
     li.id = id
+    li.dataset['favorite'] = getIsFavorite(object)
     li.addEventListener('click', function() {
       const audio = document.getElementById('music-player');
       audio.src = url;

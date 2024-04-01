@@ -107,6 +107,21 @@ li:hover {
   animation: blinker .9s;
 }
 
+/* recolor li where data-favorite == "true" */
+li[data-favorite="true"] {
+  color: var(--secondary-color);
+  padding: 1rem .2rem 1rem .2rem;
+}
+
+li[data-favorite="true"]::before {
+  content: '◐ ';
+  color: var(--secondary-color);
+}
+
+li[data-favorite="true"]:hover {
+  border-bottom: 1px solid var(--secondary-color);
+}
+
 .header {
   display: flex;
   flex-direction: column;
