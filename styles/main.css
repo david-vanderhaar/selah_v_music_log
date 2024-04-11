@@ -109,17 +109,19 @@ li:hover {
 
 /* recolor li where data-favorite == "true" */
 li[data-favorite="true"] {
-  color: var(--secondary-color);
-  padding: 1rem .2rem 1rem .2rem;
+  animation-duration: 0.01s;
+  animation-name: favorite-flicker;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 
-li[data-favorite="true"]::before {
-  content: '◐ ';
-  color: var(--secondary-color);
-}
-
-li[data-favorite="true"]:hover {
-  border-bottom: 1px solid var(--secondary-color);
+@keyframes favorite-flicker {
+  from {
+    text-shadow: 1px 0 0 var(--tertiary-color), -2px 0 0 var(--tertiary-color);
+  }
+  to {
+    text-shadow: 0px 0.5px 6px var(--tertiary-color), -1px -0.5px 2px var(--tertiary-color);
+  }
 }
 
 .header {
