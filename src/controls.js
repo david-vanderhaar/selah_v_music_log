@@ -26,6 +26,13 @@ function initializeShuffleButton() {
     player.element.src = random_song
     player.play()
   }
+  const playFirst = () => {
+    const player = getPlayer()
+    const song = player.getPlaylistUrls()[0]
+    PLAYLIST_INDEX = 0
+    player.element.src = song
+    player.play()
+  }
   const showShuffleButtonActive = () => {
     button.classList.add('button-toggle-fliccker__active')
   }
@@ -49,10 +56,12 @@ function initializeShuffleButton() {
   const shufflePlaylist = () => {
     PLAYLIST_URLS = shuffleArray(ORIGINAL_PLAYLIST_URLS)
     showShuffleButtonActive()
+    playFirst()
   }
   const unshufflePlaylist = () => {
     PLAYLIST_URLS = [...ORIGINAL_PLAYLIST_URLS]
     showShuffleButtonInactive()
+    playRandom()
   }
   const toggleShuffle = () => {
     IS_PLAYLIST_SHUFFLED = !IS_PLAYLIST_SHUFFLED
@@ -63,12 +72,10 @@ function initializeShuffleButton() {
   button.addEventListener("click", function(evt) {
     evt.preventDefault()
     toggleShuffle()
-    playRandom()
   });
   button.addEventListener("touch", function(evt) {
     evt.preventDefault()
     toggleShuffle()
-    playRandom()
   });
 }
 
