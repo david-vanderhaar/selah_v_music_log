@@ -51,8 +51,10 @@ function getIsFavorite(object) {
   return object.Key.split('/').at(-1).split('.')[0].endsWith('**')
 }
 
-PLAYLIST_URLS = []
-PLAYLIST_INDEX = 0
+let PLAYLIST_INDEX = 0
+let PLAYLIST_URLS = []
+let ORIGINAL_PLAYLIST_URLS = []
+let IS_PLAYLIST_SHUFFLED = false
 
 function addObjectsToPlaylist(objects) {
   const playlist = document.getElementById('playlist');
@@ -61,11 +63,15 @@ function addObjectsToPlaylist(objects) {
     const title = getS3ObjectTitle(object)
     if (!title) return
     const li = document.createElement('li');
+    ORIGINAL_PLAYLIST_URLS.push(url)
     PLAYLIST_URLS.push(url)
     const playlist_index = PLAYLIST_URLS.length - 1
     const id = 'track' + '-' + index
     li.id = id
     li.dataset['favorite'] = getIsFavorite(object)
+    li.dataset['source_url'] = url
+    li.dataset['track_title'] = title
+    li.dataset['index'] = index
     li.addEventListener('click', function() {
       const audio = document.getElementById('music-player');
       audio.src = url;

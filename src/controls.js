@@ -26,12 +26,48 @@ function initializeShuffleButton() {
     player.element.src = random_song
     player.play()
   }
+  const showShuffleButtonActive = () => {
+    button.classList.add('button-toggle-fliccker__active')
+  }
+  const showShuffleButtonInactive = () => {
+    button.classList.remove('button-toggle-fliccker__active')
+  }
+
+  const setPlaylistUiItems = (playlist) => {
+    const playlistContainer = document.getElementById('playlist')
+    const playlistItems = playlistContainer.children
+
+    for (let listElement of playlistItems) {
+      const newIndex = playlist.findIndex((url) => url === listElement.dataset.source_url)
+      listElement.dataset.index = newIndex
+    }
+
+    [...playlistItems]
+      .sort((a, b) => a.dataset.index - b.dataset.index)
+      .forEach(el => playlistContainer.appendChild(el))
+  }
+  const shufflePlaylist = () => {
+    PLAYLIST_URLS = shuffleArray(ORIGINAL_PLAYLIST_URLS)
+    showShuffleButtonActive()
+  }
+  const unshufflePlaylist = () => {
+    PLAYLIST_URLS = [...ORIGINAL_PLAYLIST_URLS]
+    showShuffleButtonInactive()
+  }
+  const toggleShuffle = () => {
+    IS_PLAYLIST_SHUFFLED = !IS_PLAYLIST_SHUFFLED
+    if (IS_PLAYLIST_SHUFFLED) shufflePlaylist()
+    else unshufflePlaylist()
+    setPlaylistUiItems(PLAYLIST_URLS)
+  }
   button.addEventListener("click", function(evt) {
     evt.preventDefault()
+    toggleShuffle()
     playRandom()
   });
   button.addEventListener("touch", function(evt) {
     evt.preventDefault()
+    toggleShuffle()
     playRandom()
   });
 }
