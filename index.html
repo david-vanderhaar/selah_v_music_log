@@ -17,6 +17,11 @@
     <section class="header">
       <div class="playlist-subtitle blink">Music Log</div>
       <div class="playlist-title">Selah <span id="playlist-title-numeral"></span></div>
+      <div>
+        <span id="share-button" class="control-button material-symbols-outlined">
+          share
+        </span>
+      </div>
       <div class="controls-row">
         <span id="prev-button" class="control-button material-symbols-outlined">
           navigate_before
@@ -73,6 +78,7 @@
         const client = createClient()
         const objects = await client.getAllObjects()
         client.addObjectsToPlaylist(objects.reverse())
+        client.autoplayFromUrlParams()
       }
 
       function test_initialize() {
@@ -82,16 +88,18 @@
           const alien_title = alien_text_v2(title)
           const id = title.split(' ').join('_')
           const li = document.createElement('li');
+          li.innerText = title
           li.id = id
           playlist.appendChild(li);
-          new Typed(`#${id}`, {
-            strings: [alien_title, title.repeat(4)],
-            typeSpeed: Math.random() * 100,
-            startDelay: Math.random() * 500,
-            smartBackspace: true,
-            backSpeed: 20,
-            showCursor: false,
-          });
+
+          // new Typed(`#${id}`, {
+          //   strings: [alien_title, title.repeat(4)],
+          //   typeSpeed: Math.random() * 100,
+          //   startDelay: Math.random() * 500,
+          //   smartBackspace: true,
+          //   backSpeed: 20,
+          //   showCursor: false,
+          // });
         })
       }
 

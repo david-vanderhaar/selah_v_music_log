@@ -18,6 +18,7 @@ function createClient() {
     getS3ObjectTitle,
     getS3ObjectDate,
     addObjectsToPlaylist,
+    autoplayFromUrlParams,
   }
 }
 
@@ -62,6 +63,8 @@ function addObjectsToPlaylist(objects) {
     const url = getS3ObjectUrl(object)
     const title = getS3ObjectTitle(object)
     if (!title) return
+    
+    // Create main list item
     const li = document.createElement('li');
     ORIGINAL_PLAYLIST_URLS.push(url)
     PLAYLIST_URLS.push(url)
@@ -72,17 +75,24 @@ function addObjectsToPlaylist(objects) {
     li.dataset['source_url'] = url
     li.dataset['track_title'] = title
     li.dataset['index'] = index
-    li.addEventListener('click', function() {
+    
+    // Create title span for the song
+    const titleSpan = document.createElement('span');
+    titleSpan.className = 'track-title';
+    titleSpan.addEventListener('click', function() {
       const audio = document.getElementById('music-player');
       audio.src = url;
       PLAYLIST_INDEX = playlist_index
       audio.play();
     });
+    
+    li.appendChild(titleSpan);
     playlist.appendChild(li);
+    
+    // add text animation
     const alien_text = alien_text_v2(title)
-
     if (index <= 10) {
-      new Typed(`#${id}`, {
+      new Typed(`#${id} .track-title`, {
         strings: [alien_text, title],
         typeSpeed: Math.random() * 20,
         startDelay: Math.random() * 500,
@@ -91,9 +101,61 @@ function addObjectsToPlaylist(objects) {
         showCursor: false,
       });
     } else {
-      li.innerHTML = title
+      titleSpan.innerHTML = title
     }
   });
+
+  // add share button click event
+  // to share the current track
+  const shareButton = document.getElementById('share-button');
+  shareButton.addEventListener('click', (e) => {
+    e.stopPropagation();
+    // get the current track title
+    const currentTrackUrl = PLAYLIST_URLS[PLAYLIST_INDEX]
+    const currentTrackElement = [...playlist.children].find((el) => el.dataset.source_url === currentTrackUrl);
+    if (!currentTrackElement) return playlist.children[0].dataset.track_title
+    const title = currentTrackElement.dataset.track_title
+    const permalink = `${window.location.origin}${window.location.pathname}?track=${encodeURIComponent(title)}`;
+    navigator.clipboard.writeText(permalink);
+    // add feedback
+    alert(`link copied to clipboard: ${permalink}`);
+  });
+}
+
+function autoplayFromUrlParams() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const autoplayTrack = urlParams.get('track');
+  if (autoplayTrack) {
+    // get url from title
+    const trackTitle = decodeURIComponent(autoplayTrack);
+    const trackUrl = PLAYLIST_URLS.find((url) => url.includes(trackTitle));
+    if (trackUrl) {
+      PLAYLIST_INDEX = PLAYLIST_URLS.findIndex((url) => url === trackUrl);
+      const audio = document.getElementById('music-player');
+      audio.src = trackUrl;
+
+      // create and show dialog
+      const dialog = document.createElement('dialog');
+      dialog.innerHTML = `
+        <form method="dialog">
+          <div>Welcome to</div>
+          <h2 class='favorite-flicker' style='margin-top: 0px'>Selah V</h2>
+          <button id="confirm" value="default">Initialize Landing Sequence</button>
+        </form>
+      `;
+      document.body.appendChild(dialog);
+      
+      // Add slight delay before showing dialog to ensure transition works
+      requestAnimationFrame(() => {
+        dialog.showModal();
+      });
+
+      // handle dialog response
+      dialog.addEventListener('close', () => {
+        audio.play();
+      });
+    }
+  }
 }
 
 function handleError(error) {
