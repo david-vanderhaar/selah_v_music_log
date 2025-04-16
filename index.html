@@ -79,6 +79,9 @@
         const objects = await client.getAllObjects()
         client.addObjectsToPlaylist(objects.reverse())
         client.autoplayFromUrlParams()
+        
+        // Initialize playlist switcher
+        client.initializePlaylistSwitcher()
       }
 
       function test_initialize() {

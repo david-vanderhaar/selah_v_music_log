@@ -1,6 +1,35 @@
 const BUCKET = 'selah-v'
-const PREFIX = 'tapes/chronological/';
+let PREFIX = 'tapes/chronological/';
 const S3_CLIENT = getAwsS3Client()
+
+// Define available playlists with their styling information
+const PLAYLISTS = [
+  {
+    id: 'chronological',
+    name: 'Chronological',
+    prefix: 'tapes/chronological/',
+    colors: {
+      primary: '#e6734f',
+      secondary: '#e5ca9f',
+      tertiary: '#b84b2d',
+      background: '#10101f'
+    }
+  },
+  {
+    id: 'sun-dark',
+    name: 'SUN dark',
+    prefix: 'tapes/SUN dark/',
+    colors: {
+      primary: '#f5b700',
+      secondary: '#db7c26',
+      tertiary: '#d8572a',
+      background: '#180b0b'
+    }
+  }
+];
+
+// Set the active playlist (default to first one)
+let ACTIVE_PLAYLIST = PLAYLISTS[0];
 
 function getAwsS3Client() {
   AWS.config.region = 'us-east-1';
@@ -19,11 +48,14 @@ function createClient() {
     getS3ObjectDate,
     addObjectsToPlaylist,
     autoplayFromUrlParams,
+    initializePlaylistSwitcher,
+    switchPlaylist
   }
 }
 
 async function getAllObjects() {
   try {
+    PREFIX = ACTIVE_PLAYLIST.prefix;
     const response = await S3_CLIENT.listObjects({Prefix: PREFIX}).promise()
     return response.Contents
   } catch (error) {
@@ -105,8 +137,7 @@ function addObjectsToPlaylist(objects) {
     }
   });
 
-  // add share button click event
-  // to share the current track
+  // update share button click event to include playlist ID
   const shareButton = document.getElementById('share-button');
   shareButton.addEventListener('click', (e) => {
     e.stopPropagation();
@@ -115,8 +146,11 @@ function addObjectsToPlaylist(objects) {
     const currentTrackElement = [...playlist.children].find((el) => el.dataset.source_url === currentTrackUrl);
     if (!currentTrackElement) return playlist.children[0].dataset.track_title
     const title = currentTrackElement.dataset.track_title
-    const permalink = `${window.location.origin}${window.location.pathname}?track=${encodeURIComponent(title)}`;
+    
+    // Include playlist ID in the permalink
+    const permalink = `${window.location.origin}${window.location.pathname}?playlist=${ACTIVE_PLAYLIST.id}&track=${encodeURIComponent(title)}`;
     navigator.clipboard.writeText(permalink);
+    
     // add feedback
     alert(`link copied to clipboard: ${permalink}`);
   });
@@ -124,8 +158,13 @@ function addObjectsToPlaylist(objects) {
 
 function autoplayFromUrlParams() {
   const urlParams = new URLSearchParams(window.location.search);
+  const playlistId = urlParams.get('playlist');
   const autoplayTrack = urlParams.get('track');
-  if (autoplayTrack) {
+  
+  // Function to continue with track loading after playlist is set
+  const loadTrack = () => {
+    if (!autoplayTrack) return;
+    
     // get url from title
     const trackTitle = decodeURIComponent(autoplayTrack);
     const trackUrl = PLAYLIST_URLS.find((url) => url.includes(trackTitle));
@@ -140,6 +179,7 @@ function autoplayFromUrlParams() {
         <form method="dialog">
           <div>Welcome to</div>
           <h2 class='favorite-flicker' style='margin-top: 0px'>Selah V</h2>
+          <div>Playlist: ${ACTIVE_PLAYLIST.name}</div>
           <button id="confirm" value="default">Initialize Landing Sequence</button>
         </form>
       `;
@@ -155,7 +195,109 @@ function autoplayFromUrlParams() {
         audio.play();
       });
     }
+  };
+  
+  // Check if a playlist is specified in the URL
+  if (playlistId) {
+    const targetPlaylist = PLAYLISTS.find(p => p.id === playlistId);
+    if (targetPlaylist && targetPlaylist.id !== ACTIVE_PLAYLIST.id) {
+      // We need to switch to the requested playlist first, then load the track
+      switchPlaylist(playlistId).then(() => {
+        loadTrack();
+      });
+    } else {
+      // Already on the right playlist, just load the track
+      loadTrack();
+    }
+  } else {
+    // No playlist specified, just try to load the track from current playlist
+    loadTrack();
   }
+}
+
+// New function to initialize the playlist switcher UI
+function initializePlaylistSwitcher() {
+  const container = document.createElement('div');
+  container.className = 'playlist-switcher';
+  
+  PLAYLISTS.forEach(playlist => {
+    const button = document.createElement('button');
+    button.innerText = playlist.name;
+    button.dataset.playlistId = playlist.id;
+    button.className = 'playlist-button';
+    
+    // Highlight the active playlist
+    if (playlist.id === ACTIVE_PLAYLIST.id) {
+      button.classList.add('active');
+    }
+    
+    button.addEventListener('click', async () => {
+      await switchPlaylist(playlist.id);
+    });
+    
+    container.appendChild(button);
+  });
+  
+  // Insert after header section
+  const header = document.querySelector('.header');
+  header.parentNode.insertBefore(container, header.nextSibling);
+}
+
+// Function to switch between playlists
+async function switchPlaylist(playlistId) {
+  // Find the selected playlist
+  const newPlaylist = PLAYLISTS.find(p => p.id === playlistId);
+  if (!newPlaylist || newPlaylist.id === ACTIVE_PLAYLIST.id) return;
+  
+  // Update active playlist
+  ACTIVE_PLAYLIST = newPlaylist;
+  PREFIX = ACTIVE_PLAYLIST.prefix;
+  
+  // Update color scheme
+  updateColorScheme(ACTIVE_PLAYLIST.colors);
+  
+  // Clear current playlist
+  clearPlaylist();
+  
+  // Load new tracks
+  const objects = await getAllObjects();
+  addObjectsToPlaylist(objects.reverse());
+  
+  // Update active button
+  const buttons = document.querySelectorAll('.playlist-button');
+  buttons.forEach(btn => {
+    if (btn.dataset.playlistId === playlistId) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+}
+
+function updateColorScheme(colors) {
+  const root = document.documentElement;
+  
+  // Apply with transition
+  root.style.setProperty('--primary-color', colors.primary);
+  root.style.setProperty('--secondary-color', colors.secondary);
+  root.style.setProperty('--tertiary-color', colors.tertiary);
+  root.style.setProperty('--background-color', colors.background);
+  
+  // Update scrollbar color
+  document.body.style.setProperty('scrollbar-color', `${colors.primary} transparent`);
+}
+
+function clearPlaylist() {
+  const playlist = document.getElementById('playlist');
+  playlist.innerHTML = '';
+  PLAYLIST_URLS = [];
+  ORIGINAL_PLAYLIST_URLS = [];
+  PLAYLIST_INDEX = 0;
+  
+  // Stop audio if playing
+  const audio = document.getElementById('music-player');
+  audio.pause();
+  audio.src = '';
 }
 
 function handleError(error) {

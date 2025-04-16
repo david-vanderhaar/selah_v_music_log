@@ -3,6 +3,7 @@
   --secondary-color: #e5ca9f;
   --tertiary-color: #b84b2d;
   --background-color: #10101f;
+  --transition-time: 0.5s;
 }
 
 @font-face {
@@ -23,6 +24,7 @@
        url('../assets/fonts/Space_Mono/SpaceMono-Regular.ttf') format('svg');               /* Legacy iOS */
 }
 
+/* Add smooth transitions for color changes */
 body {
   font-family: 'Phudu', 'Space Mono', 'Open Sans', sans-serif;
   background-color: var(--background-color);
@@ -30,19 +32,60 @@ body {
   text-transform: uppercase;
   max-width: 600px;
   margin: auto;
-
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  transition: background-color var(--transition-time) ease, color var(--transition-time) ease;
 }
 
+/* Playlist switcher styles */
+.playlist-switcher {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 10px 0 20px 0;
+  width: 100%;
+  max-width: 400px;
+}
+
+.playlist-button {
+  background-color: transparent;
+  color: var(--secondary-color);
+  border: 1px solid var(--secondary-color);
+  padding: 6px 12px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+}
+
+.playlist-button:hover {
+  background-color: var(--tertiary-color);
+  color: var(--secondary-color);
+  transform: scale(1.05);
+}
+
+.playlist-button.active {
+  background-color: var(--tertiary-color);
+  color: var(--secondary-color);
+  border-color: var(--primary-color);
+  animation-duration: 0.1s;
+  animation-name: favorite-flicker;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+/* Apply transitions to all elements that use CSS variables */
 .playlist-title {
   font-size: 2.5rem;
   text-align: center;
   color: var(--primary-color);
   font-weight: 600;
   margin-bottom: 20px;
+  transition: color var(--transition-time) ease;
   /* -webkit-text-stroke: 1px var(--secondary-color); */
 }
 
@@ -50,6 +93,7 @@ body {
   font-size: 1rem;
   text-align: center;
   color: var(--primary-color);
+  transition: color var(--transition-time) ease;
   /* -webkit-text-stroke: 1px var(--secondary-color); */
 }
 
@@ -76,8 +120,9 @@ body {
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: #e6734f;
+  background-color: var(--primary-color);
   border-radius: 10px;
+  transition: background-color var(--transition-time) ease;
 }
 
 audio {
@@ -99,6 +144,7 @@ li {
   margin: 10px 0;
   transition: all 0.3s ease;
   overflow-wrap: anywhere;
+  color: var(--primary-color);
 }
 
 li:hover {
@@ -141,6 +187,7 @@ li[data-favorite="true"] {
   width: 100%;
   background-color: var(--primary-color);
   height: 300px;
+  transition: background-color var(--transition-time) ease;
   /* mask-image: url('../assets/texture_2.png');
   mask-size: contain;
   -webkit-mask-image: url('../assets/texture_2.png');
@@ -210,6 +257,7 @@ li[data-favorite="true"] {
   display: block;
   top: 8px;
   position: relative;
+  transition: border-color var(--transition-time) ease;
 }
 
 .locator-circle--inner {
@@ -223,6 +271,7 @@ li[data-favorite="true"] {
   left: 12px;
   position: relative;
   animation: blinker 10s infinite reverse;
+  transition: border-color var(--transition-time) ease, background-color var(--transition-time) ease;
 }
 
 .locator-text {
@@ -230,6 +279,7 @@ li[data-favorite="true"] {
   color: var(--secondary-color);
   padding-left: 20px;
   font-size: 11px;
+  transition: border-color var(--transition-time) ease, color var(--transition-time) ease;
 }
 
 .locator {
@@ -265,7 +315,7 @@ dialog {
   text-align: center;
   max-width: 400px;
   position: relative;
-  transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out, background-color var(--transition-time) ease, color var(--transition-time) ease, border-color var(--transition-time) ease;
 }
 
 dialog::backdrop {
@@ -281,7 +331,7 @@ dialog button {
   font-family: 'Space Mono', monospace;
   text-transform: uppercase;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease, color var(--transition-time) ease, border-color var(--transition-time) ease, background-color var(--transition-time) ease;
   margin-top: 1rem;
   outline: none;
   animation: blinker 3s infinite;

@@ -7,3 +7,4 @@ builds/*
 butler/
 butler/*
 .DS_Store
+.vscode/
