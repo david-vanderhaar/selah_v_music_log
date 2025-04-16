@@ -16,14 +16,14 @@ const PLAYLISTS = [
     }
   },
   {
-    id: 'sun-dark',
-    name: 'SUN dark',
-    prefix: 'tapes/SUN dark/',
+    id: 'jarod_x_david',
+    name: 'Jarod x David',
+    prefix: 'tapes/Jarod x David/',
     colors: {
-      primary: '#f5b700',
-      secondary: '#db7c26',
-      tertiary: '#d8572a',
-      background: '#180b0b'
+      primary: '#b8d9a3',
+      secondary: '#f6f6f6',
+      tertiary: '#9a9a9a',
+      background: '#10101f'
     }
   }
 ];
@@ -111,7 +111,7 @@ function addObjectsToPlaylist(objects) {
     // Create title span for the song
     const titleSpan = document.createElement('span');
     titleSpan.className = 'track-title';
-    titleSpan.addEventListener('click', function() {
+    li.addEventListener('click', function() {
       const audio = document.getElementById('music-player');
       audio.src = url;
       PLAYLIST_INDEX = playlist_index
