@@ -8,3 +8,4 @@ butler/
 butler/*
 .DS_Store
 .vscode/
+pnpm-lock.yaml
