@@ -16,6 +16,21 @@ const PLAYLISTS = [
     }
   },
   {
+    id: 'catamorph',
+    name: 'Catamorph',
+    prefix: 'tapes/Catamorph/',
+    colors: {
+      primary: '#EFE1D1',
+      secondary: '#A78295',
+      tertiary: '#574052',
+      background: '#1e151f'
+      // primary: '#F6DC43',
+      // secondary: '#FF2DF1',
+      // tertiary: '#A5158C',
+      // background: '#410445'
+    }
+  },
+  {
     id: 'jarod_x_david',
     name: 'Jarod x David',
     prefix: 'tapes/Jarod x David/',

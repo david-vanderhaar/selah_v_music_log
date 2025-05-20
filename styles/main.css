@@ -71,7 +71,7 @@ body {
 .playlist-button.active {
   background-color: var(--tertiary-color);
   color: var(--secondary-color);
-  border-color: var(--primary-color);
+  /* border-color: var(--primary-color); */
   animation-duration: 0.1s;
   animation-name: favorite-flicker;
   animation-iteration-count: infinite;
