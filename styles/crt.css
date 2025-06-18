@@ -34,7 +34,7 @@
   pointer-events: none;
   /* animation: crtFlicker 0.15s infinite; */
 }
-.crt::before {
+/* .crt::before {
   content: " ";
   display: block;
   position: absolute;
@@ -46,7 +46,7 @@
   z-index: 2;
   background-size: 100% 3px, 3px 100%;
   pointer-events: none;
-}
+} */
 .crt {
   /* animation: textShadow 10s infinite; */
 }

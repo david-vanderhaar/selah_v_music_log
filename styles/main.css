@@ -24,6 +24,10 @@
        url('../assets/fonts/Space_Mono/SpaceMono-Regular.ttf') format('svg');               /* Legacy iOS */
 }
 
+/* html {
+  scrollbar-width: none;
+} */
+
 /* Add smooth transitions for color changes */
 body {
   font-family: 'Phudu', 'Space Mono', 'Open Sans', sans-serif;
@@ -44,7 +48,7 @@ body {
   display: flex;
   justify-content: center;
   gap: 10px;
-  margin: 10px 0 20px 0;
+  margin: 0px 0 10px 0;
   width: 100%;
   max-width: 400px;
 }
@@ -53,7 +57,7 @@ body {
   background-color: transparent;
   color: var(--secondary-color);
   border: 1px solid var(--secondary-color);
-  padding: 6px 12px;
+  padding: 4px 12px;
   font-family: 'Space Mono', monospace;
   font-size: 0.8rem;
   text-transform: uppercase;
@@ -99,7 +103,7 @@ body {
 
 .playlist-container {
   overflow-x: auto;
-  height: 275px;
+  height: 246px;
   position: relative;
 }
 
@@ -155,8 +159,8 @@ li:hover {
 
 /* recolor li where data-favorite == "true" */
 li[data-favorite="true"] {
-  animation-duration: 0.01s;
-  animation-name: favorite-flicker;
+  animation-duration: 0.1s;
+  animation-name: favorite-track-flicker;
   animation-iteration-count: infinite;
   animation-direction: alternate;
 }
@@ -169,6 +173,19 @@ li[data-favorite="true"] {
     text-shadow: 0px 0.5px 6px var(--tertiary-color), -1px -0.5px 2px var(--tertiary-color);
   }
 }
+
+@keyframes favorite-track-flicker {
+  0% {
+    text-shadow: 1px 0 0 var(--tertiary-color), -2px 0 0 var(--tertiary-color);
+  }
+  50% {
+    text-shadow: 0.5px 0.5px 3px #b84b2d, -4px 0 0 #b84b2d;
+  }
+  100% {
+    text-shadow: 0px 0.5px 6px var(--tertiary-color), -1px -0.5px 2px var(--tertiary-color);
+  }
+}
+
 
 .header {
   display: flex;

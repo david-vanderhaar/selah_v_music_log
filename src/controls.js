@@ -163,8 +163,8 @@ function initializePlaytimeProgress() {
     color: '#b84b2d',
     svgStyle: {
       display: 'block',
-      width: '220px',
-      bottom: '227px',
+      width: '170px',
+      bottom: '177px',
       position: 'relative',
       left: '-10px',
     }
