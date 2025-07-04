@@ -31,6 +31,17 @@ const PLAYLISTS = [
     }
   },
   {
+    id: 'oddessey',
+    name: 'Oddessey',
+    prefix: 'tapes/Oddessey/',
+    colors: {
+      primary: '#EFE1D1',
+      secondary: '#A78295',
+      tertiary: '#574052',
+      background: '#1e151f'
+    }
+  },
+  {
     id: 'jarod_x_david',
     name: 'Jarod x David',
     prefix: 'tapes/Jarod x David/',
@@ -40,7 +51,7 @@ const PLAYLISTS = [
       tertiary: '#9a9a9a',
       background: '#10101f'
     }
-  }
+  },
 ];
 
 // Set the active playlist (default to first one)
