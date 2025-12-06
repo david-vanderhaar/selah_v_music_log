@@ -2,11 +2,11 @@
 <rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Selah V - Catamorph</title>
-    <link>https://davidvanderhaar.github.io/selah_v_music_log</link>
+    <link>https://david-vanderhaar.github.io/selah_v_music_log</link>
     <description>Catamorph collection</description>
     <language>en-us</language>
-    <atom:link href="https://davidvanderhaar.github.io/selah_v_music_log/feeds/catamorph.rss" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Sat, 06 Dec 2025 19:29:36 GMT</lastBuildDate>
+    <atom:link href="https://david-vanderhaar.github.io/selah_v_music_log/feeds/catamorph.rss" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 06 Dec 2025 20:37:15 GMT</lastBuildDate>
     <managingEditor>d.vanderhaarhunter@gmail.com</managingEditor>
     <webMaster>d.vanderhaarhunter@gmail.com</webMaster>
     

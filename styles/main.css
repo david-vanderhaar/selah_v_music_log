@@ -311,9 +311,12 @@ li[data-favorite="true"] {
 
 #share-button {
   position: relative;
-  top: 38px;
-  right: 116px;
-  margin-top: -36px;
+  right: 108px;
+}
+
+#rss-button {
+  position: relative;
+  left: 110px;
 }
 
 .favorite-flicker {

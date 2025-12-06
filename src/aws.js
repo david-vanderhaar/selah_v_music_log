@@ -75,8 +75,14 @@ function createClient() {
     addObjectsToPlaylist,
     autoplayFromUrlParams,
     initializePlaylistSwitcher,
-    switchPlaylist
+    switchPlaylist,
+    updateRssFeedLinks,
   }
+}
+
+function generateRssFeedLink(playlist) {
+  const siteUrl = 'https://david-vanderhaar.github.io/selah_v_music_log';
+  return `${siteUrl}/feeds/${playlist.id}.rss`;
 }
 
 async function getAllObjects() {
@@ -298,6 +304,16 @@ async function switchPlaylist(playlistId) {
       btn.classList.remove('active');
     }
   });
+
+  // Update RSS feed links
+  updateRssFeedLinks();
+}
+
+function updateRssFeedLinks() {
+  const rssContainer = document.getElementById('rss-link');
+  const href = generateRssFeedLink(ACTIVE_PLAYLIST);
+  rssContainer.href = href;
+  rssContainer.title = `RSS Feed - ${ACTIVE_PLAYLIST.name}`;
 }
 
 function updateColorScheme(colors) {

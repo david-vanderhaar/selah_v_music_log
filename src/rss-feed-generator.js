@@ -105,7 +105,7 @@ function generateRSSFeed(playlistName, playlistDescription, tracks, playlistId) 
   // const siteUrl = 'https://selah-v.vercel.app';
   // const feedUrl = `${siteUrl}/feed.rss`;
   // github pages url
-  const siteUrl = 'https://davidvanderhaar.github.io/selah_v_music_log';
+  const siteUrl = 'https://david-vanderhaar.github.io/selah_v_music_log';
   const feedUrl = `${siteUrl}/feeds/${playlistId}.rss`;
   const now = new Date().toUTCString();
 

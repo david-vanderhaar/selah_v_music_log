@@ -17,10 +17,15 @@
     <section class="header">
       <div class="playlist-subtitle blink">Music Log</div>
       <div class="playlist-title">Selah <span id="playlist-title-numeral"></span></div>
-      <div>
+      <div style="height: 0;">
         <span id="share-button" class="control-button material-symbols-outlined">
           share
         </span>
+        <a id="rss-link" target="_blank">
+          <span id="rss-button" class="control-button material-symbols-outlined">
+            rss_feed
+          </span>
+        </a>
       </div>
       <div class="controls-row">
         <span id="prev-button" class="control-button material-symbols-outlined">
@@ -49,6 +54,9 @@
         <span id="next-button" class="control-button material-symbols-outlined">
           navigate_next
         </span>
+        <!-- <span id="rss-button" class="control-button material-symbols-outlined">
+          rss_feed
+        </span> -->
       </div>
       <div class="slidecontainer">
         <input
@@ -82,6 +90,7 @@
         
         // Initialize playlist switcher
         client.initializePlaylistSwitcher()
+        client.updateRssFeedLinks()
       }
 
       function test_initialize() {
