@@ -5,8 +5,13 @@
     <link>https://david-vanderhaar.github.io/selah_v_music_log</link>
     <description>Catamorph collection</description>
     <language>en-us</language>
+    <image>
+      <url>https://david-vanderhaar.github.io/selah_v_music_log/assets/favicons/android-chrome-512x512.png</url>
+      <title>Selah V - Catamorph</title>
+      <link>https://david-vanderhaar.github.io/selah_v_music_log</link>
+    </image>
     <atom:link href="https://david-vanderhaar.github.io/selah_v_music_log/feeds/catamorph.rss" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Sat, 06 Dec 2025 20:37:15 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 06 Dec 2025 20:41:55 GMT</lastBuildDate>
     <managingEditor>d.vanderhaarhunter@gmail.com</managingEditor>
     <webMaster>d.vanderhaarhunter@gmail.com</webMaster>
     

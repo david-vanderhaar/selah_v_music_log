@@ -128,6 +128,8 @@ function generateRSSFeed(playlistName, playlistDescription, tracks, playlistId) 
   </item>`;
   });
 
+  const imageUrl = `${siteUrl}/assets/favicons/android-chrome-512x512.png`;
+
   const rss = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
@@ -135,6 +137,11 @@ function generateRSSFeed(playlistName, playlistDescription, tracks, playlistId) 
     <link>${siteUrl}</link>
     <description>${escapeXml(playlistDescription)}</description>
     <language>en-us</language>
+    <image>
+      <url>${imageUrl}</url>
+      <title>${escapeXml(playlistName)}</title>
+      <link>${siteUrl}</link>
+    </image>
     <atom:link href="${feedUrl}" rel="self" type="application/rss+xml" />
     <lastBuildDate>${now}</lastBuildDate>
     <managingEditor>d.vanderhaarhunter@gmail.com</managingEditor>

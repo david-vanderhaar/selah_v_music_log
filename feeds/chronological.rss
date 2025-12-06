@@ -5,8 +5,13 @@
     <link>https://david-vanderhaar.github.io/selah_v_music_log</link>
     <description>Chronological collection of music</description>
     <language>en-us</language>
+    <image>
+      <url>https://david-vanderhaar.github.io/selah_v_music_log/assets/favicons/android-chrome-512x512.png</url>
+      <title>Selah V - Chronological</title>
+      <link>https://david-vanderhaar.github.io/selah_v_music_log</link>
+    </image>
     <atom:link href="https://david-vanderhaar.github.io/selah_v_music_log/feeds/chronological.rss" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Sat, 06 Dec 2025 20:37:14 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 06 Dec 2025 20:41:55 GMT</lastBuildDate>
     <managingEditor>d.vanderhaarhunter@gmail.com</managingEditor>
     <webMaster>d.vanderhaarhunter@gmail.com</webMaster>
     
