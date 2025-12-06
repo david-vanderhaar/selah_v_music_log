@@ -11,9 +11,14 @@
     "publish_itch": "npm run build_itch && npm run deploy_itch",
     "build": "npm run build_itch",
     "deploy": "npm run deploy_itch",
-    "publish": "npm run publish_itch"
+    "publish": "npm run publish_itch",
+    "generate-feeds": "node src/rss-feed-generator.js",
+    "generate-feed": "node src/rss-feed-generator.js"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "aws-sdk": "^2.1349.0"
+  }
 }

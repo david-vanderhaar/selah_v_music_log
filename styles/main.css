@@ -46,6 +46,7 @@ body {
 /* Playlist switcher styles */
 .playlist-switcher {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
   margin: 0px 0 10px 0;
